@@ -1,9 +1,50 @@
 977.有序数组的平方 ，
 双指针方法卡了很久，思路僵化了，总感觉可以从同一头开始，结果一直解决不了排序问题。
 只好优先暴力使用sorted方法解题。
+代码如下，解决是解决了，但是time complexity是O(n log n) 还是太高了
 
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        new_l = []
+        for i in nums:
+            new_l.append(i**2)
+        return sorted(new_l)
+指针法实在没有想透，参考了部分讲解之后，才豁然了解，原来是自己忽略了重要的原数组是已经有序排列好了的
+指针应该从两头开始， 把两头数字进行对比，将更大的数加入一个新的数组， 等遍历完成后再进行reverse。
+代码如下：
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        fast = len(nums) - 1
+        slow = 0
+        new_nums = []
 
+        while slow <= fast:
+            if nums[slow]**2 > nums[fast]**2:
+                new_nums.append(nums[slow]**2)
+                slow+=1
+            else:
+                new_nums.append(nums[fast]** 2)
+                fast-=1
+        
+        return new_nums[::-1]
 
+解法思路
+将数组元素平方后再进行排列，由于在平方前已经有序排列了，所以数组的最大值只可能出现在左右两边，即该list为左右大逐渐向中间缩小。
+在更新时，将每次从大到小取值。
+看了解析文章后，发现python可以提前定义列表，存放结果，省去了reverse的过程，
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        l, r, i = 0, len(nums)-1, len(nums)-1
+        res = [float('inf')] * len(nums) # 需要提前定义列表，存放结果
+        while l <= r:
+            if nums[l] ** 2 < nums[r] ** 2: # 左右边界进行对比，找出最大值
+                res[i] = nums[r] ** 2
+                r -= 1 # 右指针往左移动
+            else:
+                res[i] = nums[l] ** 2
+                l += 1 # 左指针往右移动
+            i -= 1 # 存放结果的指针需要往前平移一位
+        return res
 209.长度最小的子数组 ，
 
 

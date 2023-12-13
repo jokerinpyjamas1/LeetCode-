@@ -65,6 +65,9 @@ return -1
 2. fast,获取新数组需要的元素
 3. slow，获取新数组中元素所在的位置，即index值
 
+难点：
+理解替换slow值与fast值的原因
+
 pseudocode：
 快慢指针都是从0开始
         slow = 0

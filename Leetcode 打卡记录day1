@@ -53,4 +53,42 @@ while left < right: 只有left < right 才有意义
             return middle 
 都没找到，则
 return -1
+
+
+###
 27. 移除元素  
+数组中不存在删除只存在覆盖
+
+双指针思路:
+1|2|3|4|3|5 一层for循环解决两层for循环完成的内容
+1. 定义两个不同指针，一个fast， 一个slow
+2. fast,获取新数组需要的元素
+3. slow，获取新数组中元素所在的位置，即index值
+
+pseudocode：
+快慢指针都是从0开始
+        slow = 0
+        fast = 0
+        for i in range(len(nums)):
+            if nums[fast] != val: （当快指针所对应数组值与所需删除值不相等时，将用快指针对应值替换慢指针对应值）
+                nums[slow] = nums[fast]
+                slow += 1
+            fast += 1
+        return slow
+
+理解方向：
+nums = 1|2|3 需要删除 2
+当fast = 0， slow = 0时
+nums[fast]为1， 和删除值不等，即需要赋值nums[slow]为nums[fast]
+fast，slow各自增加1
+当fast = 1， slow = 1时
+nums[fast]为2， 和删除值相符，即跳过改变nums[slow]这步
+fast增加1，slow不变即 fast = 2，slow = 1
+nums[fast]为3， 和删除值不等，即需要赋值nums[slow]为nums[fast]
+fast，slow各自增加1
+此时nums 变成
+1|3|3
+返回slow值则为新数组的长度
+
+
+

@@ -1,1 +1,17 @@
+### Day1刷题日志
 
+#Finish reading 数组理论基础
+过去不注重理论知识，对于数组概念比较模糊。
+重读之后对于数组有了全新的认知。
+
+
+###
+704. 二分查找
+通过不断二分， 寻找target
+易错： 1.while循环 break条件 < or <=
+      2. if list[i] > target:
+            right = middle or middle -1?
+左闭右闭[a,b]  incluede a, b
+左闭右开[a,b)  include a but not b
+
+27. 移除元素  

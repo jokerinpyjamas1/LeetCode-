@@ -46,8 +46,38 @@ class Solution:
             i -= 1 # 存放结果的指针需要往前平移一位
         return res
 209.长度最小的子数组 ，
+暴力解法：
+        l = len(nums)
+        min_len = float('inf')
+        
+        for i in range(l):
+            cur_sum = 0
+            for j in range(i, l):
+                cur_sum += nums[j]
+                if cur_sum >= target:
+                    min_len = min(min_len, j - i + 1)
+                    break
+        
+        return min_len if min_len != float('inf') else 0
+暴力思维通过两个for循环，一个来找起点，一个来找终点，最后找到所有集合情况，可以通过简单test但是会超时。
 
-
+运用滑动窗口来解决问题
+一个for循环完成两个for循环的结果。一个for循环的里的for i为终止位置，需要考虑如何移动起始位置。
+过程中因为持续更新起始位置，所以需要使用while
+code:
+        l = len(nums)
+        left = 0
+        right = 0
+        min_len = float('inf')
+        sum = 0 
+        while right < l:
+            sum = sum + nums[right]
+            while sum >= target:
+                min_len = min(min_len,right-left+1)
+                sum = sum - nums[left]
+                left+=1
+            right += 1
+        return min_len if min_len != float('inf') else 0
 
 
 59.螺旋矩阵II 

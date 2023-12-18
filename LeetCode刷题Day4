@@ -1,0 +1,35 @@
+LeetCode：24. 两两交换链表中的节点
+交换节点的时候需要将节点2指向1,1指向3
+
+1.定义一个虚拟节点，
+dummyhead-->next = head
+cur = dummyhead
+while cur.next != null and cur.next.next is not null:条件反过来写会有可能报空指针异常
+  temp = cur.next
+  temp1 = cur.next.next.next
+  cur.next = cur.next.next
+  此时的cur.next已经不是节点一了，要提前保存一个temp来储存节点1
+  cur.next.next = temp
+  temp.next = temp1
+  cur = cur.next.next
+
+return dummyhean.next
+
+19.删除链表的倒数第N个节点
+关键点：找到倒数第N个节点，然后进行删除
+使用dummyhead， 方便在对不需要对操作的节点是不是头结点进行特殊判断，而可以统一进行操作
+定义一个快指针，先移动n+1步，
+在定义一个慢指针，然后让快慢指针一起移动，当快指针指向null时，慢指针指向要删除的节点的前一个节点
+
+pesocode：
+dummyhead = head
+fast = dummyhead
+slow = dummyhead
+n = n+1 
+while n-1 != null and fast != null
+  fast = fast.next
+  while fast != null
+    fast = fast.next
+    slow = slow.next
+slow.next =slow.next.next
+return dummyhead.next

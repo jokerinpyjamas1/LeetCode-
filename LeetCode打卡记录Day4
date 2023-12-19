@@ -33,3 +33,9 @@ while n-1 != null and fast != null
     slow = slow.next
 slow.next =slow.next.next
 return dummyhead.next
+
+160链表相交
+就是求两个链表交点节点的指针。
+
+142环形链表56
+快慢指针一定会相遇，
